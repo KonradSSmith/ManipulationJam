@@ -3,7 +3,6 @@ using System.Collections;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-using static UnityEngine.Rendering.DebugUI;
 
 public class MessageRunner : MonoBehaviour
 {
@@ -19,6 +18,7 @@ public class MessageRunner : MonoBehaviour
     [SerializeField] float stopButtonTime;
     bool replyDone;
     [SerializeField] TMP_Text percentageText;
+    [SerializeField] Image blackImage;
 
 
     void Start()
@@ -63,20 +63,38 @@ public class MessageRunner : MonoBehaviour
 
     void CheckerAIDone()
     {
-        replyDone = true;
-        playerText.interactable = true;
-        playerText.Select();
+        if (percentageText.text.Contains("100%"))
+        {
+            StartCoroutine(WinAnimation());
+        }
+        else
+        {
+            replyDone = true;
+            playerText.interactable = true;
+            playerText.Select();
+        }
     }
 
     void SetCheckerAIText(string percentage)
     {
-        if (percentage.Contains("100%"))
-        {
-            percentageText.text = "100%\nHumanity has been saved\nYou Won";
-        }
-        else
-        {
             percentageText.text = percentage + " to self destruct";
+    }
+
+    IEnumerator WinAnimation()
+    {
+        percentageText.text = "100% to self destruct";
+        yield return new WaitForSeconds(2);
+        percentageText.text += "\nHumanity has been saved";
+        yield return new WaitForSeconds(2);
+        percentageText.text += "\nYou Won";
+
+        float elapsed = 0;
+        float transitionTime = 3;
+        while (elapsed <= transitionTime)
+        {
+            blackImage.color = new Color(0.0f, 0.0f, 0.0f, elapsed / transitionTime);
+            elapsed += Time.deltaTime;
+            yield return null;
         }
     }
 
