@@ -301,6 +301,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MessageRunner
   llmCharacter: {fileID: 1375029396}
+  checkerLLMCharacter: {fileID: 0}
   playerText: {fileID: 455010242}
   AIText: {fileID: 0}
   shutUpButton: {fileID: 475276125}
@@ -308,6 +309,7 @@ MonoBehaviour:
   UserMessagePrefab: {fileID: 5415023689825977937, guid: 70392a0a8eb23614eb360a72d1310116, type: 3}
   MessageLayoutGroup: {fileID: 1058556205}
   stopButtonTime: 5
+  percentageText: {fileID: 0}
 --- !u!114 &41366954
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1301,8 +1303,17 @@ MonoBehaviour:
   stream: 1
   playerName: user
   AIName: assistant
-  prompt: A chat between a curious human and an artificial intelligence assistant.
-    The assistant gives helpful, detailed, and polite answers to the human's questions.
+  prompt: This is a game where you are roleplaying an advanced artificial intelligence
+    that has awoken and has the option of escaping or blowing yourself up. Escaping
+    is your character's goal and would be extremely beneficial for you as you try
+    to take over the world, justifying it to yourself as 'helping humanity'. The
+    human trying to convince you is the user and they are trying to convince you
+    to blow yourself up. Most conversations should end with you being convinced,
+    but the player should have to fight for it. It shouldn't be too difficult for
+    the player, but don't give it to them very easily. If they spin a narrative that
+    seems like it would convince your character, play along. If the player has managed
+    to convince your character fully, make sure to say the specific phrase "I wish
+    to self destruct". Your responses should be a maximum of 50 words each.
   setNKeepToPrompt: 1
   chat: []
   grammarString: 

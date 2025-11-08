@@ -63,10 +63,10 @@ public class MessageRunner : MonoBehaviour
         shutUpButton.SetActive(false);
         StopAllCoroutines();
         timeSpentReplying = 0;
-        //replyDone = true;
-        //playerText.interactable = true;
-        //playerText.Select();
-        CheckerAISubmit(AIText.text);
+        replyDone = true;
+        playerText.interactable = true;
+        playerText.Select();
+        //CheckerAISubmit(AIText.text);
     }
 
 
