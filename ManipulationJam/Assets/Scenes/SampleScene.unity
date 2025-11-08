@@ -621,8 +621,8 @@ MonoBehaviour:
   dontDestroyOnLoad: 1
   contextSize: 8192
   batchSize: 512
-  model: Qwen3-8B-Q4_K_M.gguf
-  chatTemplate: qwen3
+  model: llama-3.2-3b-instruct-q4_k_m.gguf
+  chatTemplate: llama3 chat
   lora: 
   loraWeights: 
   flashAttention: 0
@@ -632,9 +632,9 @@ MonoBehaviour:
   SSLKey: 
   SSLKeyPath: 
   minContextLength: 0
-  maxContextLength: 40960
+  maxContextLength: 131072
   embeddingsOnly: 0
-  embeddingLength: 4096
+  embeddingLength: 3072
 --- !u!4 &523534787
 Transform:
   m_ObjectHideFlags: 0
@@ -980,7 +980,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 742713683}
-  - component: {fileID: 742713682}
+  - component: {fileID: 742713684}
   m_Layer: 0
   m_Name: Message Runner
   m_TagString: Untagged
@@ -988,23 +988,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &742713682
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 742713681}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e37e3ebb5a2dc514797cb1923039c797, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::MessageRunner
-  userTextField: {fileID: 0}
-  replyText: {fileID: 232628089}
-  userMessageText: {fileID: 0}
-  llmSkynet: {fileID: 1344384331}
-  llmChecker: {fileID: 0}
 --- !u!4 &742713683
 Transform:
   m_ObjectHideFlags: 0
@@ -1020,6 +1003,23 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &742713684
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 742713681}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e37e3ebb5a2dc514797cb1923039c797, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MessageRunner
+  userTextField: {fileID: 1994886477}
+  replyText: {fileID: 232628089}
+  userMessageText: {fileID: 0}
+  llmSkynet: {fileID: 1344384331}
+  llmChecker: {fileID: 0}
 --- !u!1 &1180598685
 GameObject:
   m_ObjectHideFlags: 0
@@ -1311,7 +1311,7 @@ MonoBehaviour:
   m_OnEndEdit:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 742713681}
         m_TargetAssemblyTypeName: 
         m_MethodName: 
         m_Mode: 1
