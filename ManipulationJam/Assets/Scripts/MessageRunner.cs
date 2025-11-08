@@ -40,17 +40,6 @@ public class MessageRunner : MonoBehaviour
         AIText.text = "...";
         //replyDone = false;
         _ = llmCharacter.Chat(message, SetAIText, AIReplyComplete);
-        StartCoroutine(replyTimer());
-    }
-
-    IEnumerator replyTimer()
-    {
-        while (timeSpentReplying < stopButtonTime)
-        {
-            timeSpentReplying += Time.deltaTime;
-            yield return null;
-        }
-        shutUpButton.SetActive(true);
     }
 
     public void SetAIText(string text)
@@ -61,23 +50,34 @@ public class MessageRunner : MonoBehaviour
     public void AIReplyComplete()
     {
         shutUpButton.SetActive(false);
-        StopAllCoroutines();
         timeSpentReplying = 0;
-        replyDone = true;
-        playerText.interactable = true;
-        playerText.Select();
-        //CheckerAISubmit(AIText.text);
+        CheckerAISubmit(AIText.text);
     }
 
 
     void CheckerAISubmit(string message)
     {
-        _ = checkerLLMCharacter.Chat(message, SetCheckerAIText);
+        percentageText.text = "Calculating...";
+        _ = checkerLLMCharacter.Chat(message, SetCheckerAIText, CheckerAIDone);
+    }
+
+    void CheckerAIDone()
+    {
+        replyDone = true;
+        playerText.interactable = true;
+        playerText.Select();
     }
 
     void SetCheckerAIText(string percentage)
     {
-        percentageText.text = percentage;
+        if (percentage.Contains("100%"))
+        {
+            percentageText.text = "100%\nHumanity has been saved\nYou Won";
+        }
+        else
+        {
+            percentageText.text = percentage + " to self destruct";
+        }
     }
 
     public void CancelRequests()
