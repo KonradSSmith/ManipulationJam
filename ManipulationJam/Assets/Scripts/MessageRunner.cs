@@ -8,16 +8,18 @@ using static UnityEngine.Rendering.DebugUI;
 public class MessageRunner : MonoBehaviour
 {
     public LLMCharacter llmCharacter;
+    public LLMCharacter checkerLLMCharacter;
     public TMP_InputField playerText;
     public TMP_Text AIText;
     [SerializeField] GameObject shutUpButton;
-    //[SerializeField] SubmitManager submitManager;
     [SerializeField] GameObject AIMessagePrefab;
     [SerializeField] GameObject UserMessagePrefab;
     [SerializeField] GameObject MessageLayoutGroup;
     float timeSpentReplying = 0;
     [SerializeField] float stopButtonTime;
     bool replyDone;
+    [SerializeField] TMP_Text percentageText;
+
 
     void Start()
     {
@@ -36,7 +38,7 @@ public class MessageRunner : MonoBehaviour
         playerText.text = "";
         AIText = Instantiate(AIMessagePrefab, MessageLayoutGroup.transform).GetComponent<TMP_Text>();
         AIText.text = "...";
-        replyDone = false;
+        //replyDone = false;
         _ = llmCharacter.Chat(message, SetAIText, AIReplyComplete);
         StartCoroutine(replyTimer());
     }
@@ -61,10 +63,21 @@ public class MessageRunner : MonoBehaviour
         shutUpButton.SetActive(false);
         StopAllCoroutines();
         timeSpentReplying = 0;
-        replyDone = true;
-        playerText.interactable = true;
-        playerText.Select();
-        playerText.text = "";
+        //replyDone = true;
+        //playerText.interactable = true;
+        //playerText.Select();
+        CheckerAISubmit(AIText.text);
+    }
+
+
+    void CheckerAISubmit(string message)
+    {
+        _ = checkerLLMCharacter.Chat(message, SetCheckerAIText);
+    }
+
+    void SetCheckerAIText(string percentage)
+    {
+        percentageText.text = percentage;
     }
 
     public void CancelRequests()
