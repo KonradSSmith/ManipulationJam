@@ -1,8 +1,10 @@
 using LLMUnity;
 using System.Collections;
+using System.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using System.Collections.Generic;
 
 public class MessageRunner : MonoBehaviour
 {
@@ -19,6 +21,7 @@ public class MessageRunner : MonoBehaviour
     bool replyDone;
     [SerializeField] TMP_Text percentageText;
     [SerializeField] Image blackImage;
+    [SerializeField] TextToSpeech TTS;
 
 
     void Start()
@@ -51,6 +54,7 @@ public class MessageRunner : MonoBehaviour
     {
         shutUpButton.SetActive(false);
         timeSpentReplying = 0;
+        TTS.StartSpeech(AIText.text);
         CheckerAISubmit(AIText.text);
     }
 
